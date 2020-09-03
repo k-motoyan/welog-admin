@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "@dillonkearns/elm-graphql": "^4.0.3",
+    "@parcel/optimizer-terser": "^2.0.0-alpha.3",
+    "apollo-server": "^2.16.1",
+    "elm-hot": "^1.1.5",
+    "faker": "^4.1.0",
+    "node-elm-compiler": "^5.0.5",
+    "sass": "^1.26.10"
+  },
+  "dependencies": {
+    "bulma": "^0.9.0",
+    "cssnano": "^4.1.10",
+    "firebase": "^7.18.0",
+    "firebaseui": "^4.6.1",
+    "highlight": "^0.2.4",
+    "highlight.js": "^10.1.2"
+  },
+  "optimizers": {
+    "*.js": ["@parcel/optimizer-terser"],
+    "*.css": ["@parcel/optimizer-csso"]
+  },
+  "scripts": {
+    "init": "bash ./tools/download_schema.bash; cp -n .env.sample .env; npm i; elm make src/elm/Main.elm --output=/dev/null",
+    "stub": "node ./tools/graphql.js",
+    "elm-graphql": "elm-graphql http://localhost:4000/ --output src/elm --base Schema.Blog",
+    "serve": "npm run elm-graphql && parcel src/index.html",
+    "build": "parcel build src/index.html -d dist/release --no-source-maps --detailed-report 10",
+    "deploy": "npm run build && aws s3 sync ./dist/release s3://welog-admin/ --include \"*\" --acl public-read --cache-control \"max-age=3600\" --profile=welog"
+  }
+}
