@@ -21,20 +21,21 @@ import 'firebaseui/dist/firebaseui.css';
 
 import { Elm } from './elm/Main.elm';
 
-const firebaseProjectId = process.env.FIREBASE_PROJECT_ID;
+const elmDom = document.getElementById('elm-app');
+const firebaseProjectId = elmDom.dataset.firebaseProjectId;
 
 firebase.initializeApp({
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: elmDom.dataset.apiKey,
   authDomain: `${firebaseProjectId}.firebaseapp.com`,
   projectId: firebaseProjectId,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID
+  appId: elmDom.dataset.appId,
+  measurementId: elmDom.dataset.measurementId
 });
 
 const bootElm = (idToken) => {
   const flags = {
-    blogTitle: process.env.BLOG_TITLE,
-    apiUrl: process.env.API_URL,
+    blogTitle: elmDom.dataset.blogTitle,
+    apiUrl: elmDom.dataset.apiUrl,
     idToken: idToken,
   };
 

@@ -8,6 +8,15 @@
   <body>
     <div id="firebaseui-auth-container"></div>
     <div id="elm-app"></div>
+    <script>
+      const elmApp = document.getElementById('elm-app');
+      elmApp.dataset.blotTitle = process.env.BLOG_TITLE;
+      elmApp.dataset.apiUrl = process.env.API_URL;
+      elmApp.dataset.firebaseProjectId = process.env.FIREBASE_PROJECT_ID;
+      elmApp.dataset.apiKey = process.env.FIREBASE_API_KEY,
+      elmApp.dataset.appId = process.env.FIREBASE_APP_ID,
+      elmApp.dataset.measurementId = process.env.FIREBASE_MEASUREMENT_ID
+    </script>
     <script src="./index.js"></script>
   </body>
 </html>
